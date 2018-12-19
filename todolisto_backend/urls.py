@@ -5,6 +5,7 @@ from django.urls import path, include
 from backend.models import Tarea, Estado
 from rest_framework import routers, serializers, viewsets
 from rest_framework import permissions, authentication
+from django.conf.urls import include
 
 class EstadoSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -21,7 +22,7 @@ class TareaSerializer(serializers.HyperlinkedModelSerializer):
                     
     class Meta:
         model = Tarea
-        fields = ('id', 'titulo', 'descripcion', 'fecha_inicio', 'fecha_termino', 'estado', 'nombre_estado')        
+        fields = ('id', 'titulo', 'descripcion', 'fecha_inicio', 'fecha_termino', 'estado', 'nombre_estado', 'lat','lng')        
 
 class TareaViewSet(viewsets.ModelViewSet):
     authentication_classes = (authentication.TokenAuthentication,)
@@ -36,5 +37,6 @@ router.register(r'estados', EstadoViewSet)
 urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
-    path('rest-auth/', include('rest_auth.urls'))
+    path('rest-auth/', include('rest_auth.urls')),
+    path('api-auth/', include('rest_framework.urls'))
 ]
