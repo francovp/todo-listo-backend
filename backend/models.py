@@ -15,8 +15,9 @@ class Tarea(models.Model):
     fecha_inicio  = models.DateTimeField(null = True, blank=True)
     fecha_termino = models.DateTimeField(null = True, blank=True)
     estado        = models.ForeignKey(Estado, on_delete=models.CASCADE, default=1)
-    lat = models.FloatField(null = True, blank = True)
-    lng = models.FloatField(null = True, blank = True)
+    lat           = models.FloatField(null = True, blank = True)
+    lng           = models.FloatField(null = True, blank = True)
+    nombre_usuario          = models.CharField(max_length=100, null = False)
 
     @property
     def nombre_estado(self):
